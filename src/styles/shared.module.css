@@ -3,5 +3,11 @@
   padding: 0 5%;
 }
 
+.hero {
+  background-image: url("/images/header.jpg");
+  min-height: 40vh;
+  background-repeat: no-repeat;
+}
+
 .content {
 }
