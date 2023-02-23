@@ -1,10 +1,10 @@
-jest.mock('../../lib/notion/blog-index-cache')
+jest.mock('lib/notion/blog-index-cache')
 
 import {
   getDateStr,
   isYouTubeURL,
   parseYouTubeVideoId,
-} from '../../lib/blog-helpers'
+} from 'lib/blog-helpers'
 
 describe('getDateStr', () => {
   it('returns str when date has time', async () => {

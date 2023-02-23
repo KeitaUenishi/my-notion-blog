@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocumentHead from '../../components/document-head'
+import DocumentHead from 'components/document-head'
 
 const mockNextPublicURL = jest.fn()
 jest.mock('../../app/server-constants', () => ({

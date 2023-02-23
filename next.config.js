@@ -1,9 +1,9 @@
-const fs = require('fs')
-const path = require('path')
+// const fs = require('fs')
+// const path = require('path')
 const {
   NOTION_API_SECRET,
   DATABASE_ID,
-} = require('./app/server-constants')
+} = require('./src/app/server-constants')
 
 const warnOrError =
   process.env.NODE_ENV !== 'production' || process.env.GITHUB_ACTIONS
