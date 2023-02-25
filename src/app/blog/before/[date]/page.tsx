@@ -1,12 +1,8 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { NUMBER_OF_POSTS_PER_PAGE } from 'app/server-constants'
 import GoogleAnalytics from 'components/google-analytics'
-import {
-  getRankedPosts,
-  getPostsBefore,
-  getFirstPost,
-  getAllTags,
-} from 'lib/notion/client'
+import { getRankedPosts, getPostsBefore, getFirstPost, getAllTags } from 'lib/notion/client'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -18,6 +14,7 @@ import {
   PostTitle,
   ReadMoreLink,
 } from 'components/blog-parts'
+import { getBlogLink } from 'lib/blog-helpers'
 import styles from 'styles/blog.module.css'
 
 export const revalidate = 3600
@@ -47,15 +44,17 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
 
           <NoContents contents={posts} />
 
-          {posts.map(post => {
+          {posts.map((post) => {
             return (
-              <div className={styles.post} key={post.Slug}>
-                <PostDate post={post} />
-                <PostTags post={post} />
-                <PostTitle post={post} />
-                <PostExcerpt post={post} />
-                <ReadMoreLink post={post} />
-              </div>
+              <Link href={getBlogLink(post.Slug)} key={post.Slug}>
+                <div className={styles.postContainer}>
+                  <div className={styles.post}>
+                    <PostDate post={post} />
+                    <PostTags post={post} />
+                    <PostTitle post={post} />
+                  </div>
+                </div>
+              </Link>
             )
           })}
 

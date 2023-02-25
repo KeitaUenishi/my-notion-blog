@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { NUMBER_OF_POSTS_PER_PAGE } from 'app/server-constants'
 import GoogleAnalytics from 'components/google-analytics'
@@ -20,13 +21,14 @@ import {
   getFirstPostByTag,
   getAllTags,
 } from 'lib/notion/client'
+import { getBlogLink } from 'lib/blog-helpers'
 import 'styles/notion-color.css'
 
 export const revalidate = 60
 
 export async function generateStaticParams() {
   const tags = await getAllTags()
-  return tags.map(tag => ({ tag: tag.name }))
+  return tags.map((tag) => ({ tag: tag.name }))
 }
 
 const BlogTagPage = async ({ params: { tag: encodedTag } }) => {
@@ -45,7 +47,7 @@ const BlogTagPage = async ({ params: { tag: encodedTag } }) => {
     getAllTags(),
   ])
 
-  const currentTag = posts[0].Tags.find(t => t.name === tag)
+  const currentTag = posts[0].Tags.find((t) => t.name === tag)
 
   return (
     <>
@@ -53,18 +55,22 @@ const BlogTagPage = async ({ params: { tag: encodedTag } }) => {
       <div className={styles.container}>
         <div className={styles.mainContent}>
           <header>
-            <h2><span className={`tag ${colorClass(currentTag.color)}`}>{tag}</span></h2>
+            <h2>
+              <span className={`tag ${colorClass(currentTag.color)}`}>{tag}</span>
+            </h2>
           </header>
 
-          {posts.map(post => {
+          {posts.map((post) => {
             return (
-              <div className={styles.post} key={post.Slug}>
-                <PostDate post={post} />
-                <PostTags post={post} />
-                <PostTitle post={post} />
-                <PostExcerpt post={post} />
-                <ReadMoreLink post={post} />
-              </div>
+              <Link href={getBlogLink(post.Slug)} key={post.Slug}>
+                <div className={styles.postContainer}>
+                  <div className={styles.post}>
+                    <PostDate post={post} />
+                    <PostTags post={post} />
+                    <PostTitle post={post} />
+                  </div>
+                </div>
+              </Link>
             )
           })}
 

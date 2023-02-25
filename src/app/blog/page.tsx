@@ -12,12 +12,9 @@ import {
   ReadMoreLink,
 } from 'components/blog-parts'
 import styles from 'styles/blog.module.css'
-import {
-  getPosts,
-  getFirstPost,
-  getRankedPosts,
-  getAllTags,
-} from 'lib/notion/client'
+import { getPosts, getFirstPost, getRankedPosts, getAllTags } from 'lib/notion/client'
+import Link from 'next/link'
+import { getBlogLink } from 'lib/blog-helpers'
 
 export const revalidate = 60
 
@@ -36,15 +33,17 @@ const BlogPage = async () => {
         <div className={styles.mainContent}>
           <NoContents contents={posts} />
 
-          {posts.map(post => {
+          {posts.map((post) => {
             return (
-              <div className={styles.post} key={post.Slug}>
-                <PostDate post={post} />
-                <PostTags post={post} />
-                <PostTitle post={post} />
-                <PostExcerpt post={post} />
-                <ReadMoreLink post={post} />
-              </div>
+              <Link href={getBlogLink(post.Slug)} key={post.Slug}>
+                <div className={styles.postContainer}>
+                  <div className={styles.post}>
+                    <PostDate post={post} />
+                    <PostTags post={post} />
+                    <PostTitle post={post} />
+                  </div>
+                </div>
+              </Link>
             )
           })}
 
