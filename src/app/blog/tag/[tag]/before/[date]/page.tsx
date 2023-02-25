@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation'
 import { NUMBER_OF_POSTS_PER_PAGE } from 'app/server-constants'
-import GoogleAnalytics from 'components/google-analytics'
-import { colorClass } from 'components/notion-block'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -13,6 +11,8 @@ import {
   PostTitle,
   ReadMoreLink,
 } from 'components/blog-parts'
+import GoogleAnalytics from 'components/google-analytics'
+import { colorClass } from 'components/notion-block'
 import {
   getPosts,
   getRankedPosts,

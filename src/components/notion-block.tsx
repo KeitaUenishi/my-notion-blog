@@ -1,13 +1,13 @@
 import React from 'react'
-import * as interfaces from 'lib/notion/interfaces'
-
-import Code from './notion-blocks/code'
-import Embed from './notion-blocks/embed'
+import BlockEquation from './notion-blocks/block-equation'
 import Bookmark from './notion-blocks/bookmark'
-import Video from './notion-blocks/video'
+import Code from './notion-blocks/code'
+
+import Embed from './notion-blocks/embed'
 import ImageBlock from './notion-blocks/image-block'
 import InlineEquation from './notion-blocks/inline-equation'
-import BlockEquation from './notion-blocks/block-equation'
+import Video from './notion-blocks/video'
+import * as interfaces from 'lib/notion/interfaces'
 
 import styles from 'styles/notion-block.module.css'
 import 'styles/notion-color.css'

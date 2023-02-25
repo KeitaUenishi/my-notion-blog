@@ -1,5 +1,4 @@
-import { NOTION_API_SECRET, DATABASE_ID } from 'app/server-constants'
-import * as responses from './responses'
+import * as blogIndexCache from './blog-index-cache'
 import {
   Post,
   Block,
@@ -33,9 +32,10 @@ import {
   Annotation,
   SelectProperty,
 } from './interfaces'
+import * as responses from './responses'
+import { NOTION_API_SECRET, DATABASE_ID } from 'app/server-constants'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Client } = require('@notionhq/client')
-import * as blogIndexCache from './blog-index-cache'
 
 const client = new Client({
   auth: NOTION_API_SECRET,

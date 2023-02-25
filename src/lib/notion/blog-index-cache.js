@@ -6,11 +6,11 @@ const path = require('path')
 
 const BLOG_INDEX_CACHE = path.resolve('.blog_index_data')
 
+const { Client } = require('@notionhq/client')
 const {
   NOTION_API_SECRET,
   DATABASE_ID,
 } = require('app/server-constants')
-const { Client } = require('@notionhq/client')
 
 const notionClient = new Client({
   auth: NOTION_API_SECRET,

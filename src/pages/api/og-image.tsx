@@ -1,5 +1,5 @@
-import { NextRequest } from 'next/server'
 import { ImageResponse } from '@vercel/og'
+import { NextRequest } from 'next/server'
 import { NEXT_PUBLIC_SITE_TITLE } from 'app/server-constants'
 import { Post } from 'lib/notion/interfaces'
 

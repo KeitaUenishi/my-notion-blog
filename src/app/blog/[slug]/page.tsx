@@ -1,7 +1,5 @@
 import { redirect } from 'next/navigation'
 import { NEXT_PUBLIC_URL } from '../../server-constants'
-import { Post } from 'lib/notion/interfaces'
-import GoogleAnalytics from 'components/google-analytics'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -11,8 +9,8 @@ import {
   PostTags,
   PostTitle,
 } from 'components/blog-parts'
+import GoogleAnalytics from 'components/google-analytics'
 import SocialButtons from 'components/social-buttons'
-import styles from 'styles/blog.module.css'
 import { getBlogLink } from 'lib/blog-helpers'
 import {
   getPosts,
@@ -23,6 +21,8 @@ import {
   getAllTags,
   getAllBlocksByBlockId,
 } from 'lib/notion/client'
+import { Post } from 'lib/notion/interfaces'
+import styles from 'styles/blog.module.css'
 
 export const revalidate = 30
 

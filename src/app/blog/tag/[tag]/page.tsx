@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { NUMBER_OF_POSTS_PER_PAGE } from 'app/server-constants'
-import GoogleAnalytics from 'components/google-analytics'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -12,8 +11,9 @@ import {
   PostTitle,
   ReadMoreLink,
 } from 'components/blog-parts'
+import GoogleAnalytics from 'components/google-analytics'
 import { colorClass } from 'components/notion-block'
-import styles from 'styles/blog.module.css'
+import { getBlogLink } from 'lib/blog-helpers'
 import {
   getPosts,
   getRankedPosts,
@@ -21,7 +21,7 @@ import {
   getFirstPostByTag,
   getAllTags,
 } from 'lib/notion/client'
-import { getBlogLink } from 'lib/blog-helpers'
+import styles from 'styles/blog.module.css'
 import 'styles/notion-color.css'
 
 export const revalidate = 60

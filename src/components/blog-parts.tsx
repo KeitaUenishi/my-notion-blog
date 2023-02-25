@@ -1,10 +1,6 @@
-import React from 'react'
 import Link from 'next/link'
+import React from 'react'
 
-import {
-  Post,
-  SelectProperty,
-} from 'lib/notion/interfaces'
 import NotionBlocks, { colorClass } from './notion-block'
 import {
   getBeforeLink,
@@ -13,6 +9,10 @@ import {
   getTagLink,
   getTagBeforeLink,
 } from 'lib/blog-helpers'
+import {
+  Post,
+  SelectProperty,
+} from 'lib/notion/interfaces'
 import styles from 'styles/blog-parts.module.css'
 import 'styles/notion-color.css'
 

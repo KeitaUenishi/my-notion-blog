@@ -1,6 +1,6 @@
-import { getPostBySlug } from 'lib/notion/client'
-import { getBlogLink } from 'lib/blog-helpers'
 import DocumentHead from 'components/document-head'
+import { getBlogLink } from 'lib/blog-helpers'
+import { getPostBySlug } from 'lib/notion/client'
 
 const BlogSlugHead = async ({ params: { slug } }) => {
   const post = await getPostBySlug(slug)

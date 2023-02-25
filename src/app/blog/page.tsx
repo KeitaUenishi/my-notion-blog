@@ -1,20 +1,18 @@
+import Link from 'next/link'
 import { NUMBER_OF_POSTS_PER_PAGE } from 'app/server-constants'
-import GoogleAnalytics from 'components/google-analytics'
 import {
   BlogPostLink,
   BlogTagLink,
   NextPageLink,
   NoContents,
   PostDate,
-  PostExcerpt,
   PostTags,
   PostTitle,
-  ReadMoreLink,
 } from 'components/blog-parts'
-import styles from 'styles/blog.module.css'
-import { getPosts, getFirstPost, getRankedPosts, getAllTags } from 'lib/notion/client'
-import Link from 'next/link'
+import GoogleAnalytics from 'components/google-analytics'
 import { getBlogLink } from 'lib/blog-helpers'
+import { getPosts, getFirstPost, getRankedPosts, getAllTags } from 'lib/notion/client'
+import styles from 'styles/blog.module.css'
 
 export const revalidate = 60
 
