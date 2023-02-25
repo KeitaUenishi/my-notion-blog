@@ -8,8 +8,9 @@ const RootPage = () => (
     <GoogleAnalytics pageTitle={NEXT_PUBLIC_SITE_TITLE} />
     <div className={styles.container}>
       <div className={styles.hero} >
-        <div>あれやこれや</div>
-        <div>{NEXT_PUBLIC_SITE_TITLE}</div>
+        <h1 className="text-3xl font-bold underline">
+        {NEXT_PUBLIC_SITE_TITLE}
+        </h1>
       </div>
     </div>
   </>

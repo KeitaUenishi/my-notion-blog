@@ -2,7 +2,6 @@ import Header from 'components/header'
 import Footer from 'components/footer'
 import 'styles/global.css'
 import 'styles/syntax-coloring.css'
-import styles from 'styles/shared.module.css'
 
 const RootLayout = ({
   children,
@@ -11,9 +10,9 @@ const RootLayout = ({
 }) => (
   <html lang="ja" prefix="og: https://ogp.me/ns#">
     <body>
-      <div className={styles.container}>
+      <div>
         <Header />
-        <div className={styles.content}>
+        <div>
           {children}
         </div>
         <Footer />
