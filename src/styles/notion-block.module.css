@@ -26,7 +26,7 @@
   display: block;
   overflow: auto;
   padding: 2rem;
-  background: rgb(247, 246, 243);
+  background: #ffffff;
   font-size: 0.9rem;
   line-height: 1.2rem;
   border-radius: var(--radius);
@@ -34,7 +34,7 @@
 .code pre code {
   color: var(--fg);
   padding: 0;
-  background: rgb(247, 246, 243) !important;
+  background: #ffffff !important;
 }
 
 .callout {
@@ -192,8 +192,7 @@
 
 .toggle > summary > a > h4,
 .toggle > summary > a > h5,
-.toggle > summary > a > h6
-{
+.toggle > summary > a > h6 {
   display: inline;
 }
 
@@ -238,5 +237,5 @@
   padding-left: 1.5rem;
 }
 .tableOfContents > a.indent-2 {
-  padding-left: 3.0rem;
+  padding-left: 3rem;
 }

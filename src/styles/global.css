@@ -1,4 +1,31 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+p {
+  color: #fff;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+ul,
+ol {
+  margin: 0;
+  padding-inline-start: 1.5rem;
+  color: #fff;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  margin: 0.3rem 0;
+  background-color: #333;
+}
+
+code {
+  background: #ffffff;
+}
