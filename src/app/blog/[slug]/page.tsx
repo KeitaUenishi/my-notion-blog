@@ -28,7 +28,7 @@ export const revalidate = 30
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()
-  return posts.map(p => ({ slug: p.Slug }))
+  return posts.map((p) => ({ slug: p.Slug }))
 }
 
 const BlogSlugPage = async ({ params: { slug } }) => {
@@ -39,13 +39,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
     redirect('/blog')
   }
 
-  const [
-    blocks,
-    rankedPosts,
-    recentPosts,
-    tags,
-    sameTagPosts,
-  ] = await Promise.all([
+  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts] = await Promise.all([
     getAllBlocksByBlockId(post.PageId),
     getRankedPosts(),
     getPosts(5),
@@ -72,10 +66,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
               {NEXT_PUBLIC_URL && (
                 <SocialButtons
                   title={post.Title}
-                  url={new URL(
-                    getBlogLink(post.Slug),
-                    NEXT_PUBLIC_URL
-                  ).toString()}
+                  url={new URL(getBlogLink(post.Slug), NEXT_PUBLIC_URL).toString()}
                   id={post.Slug}
                 />
               )}
@@ -84,10 +75,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
         </div>
 
         <div className={styles.subContent}>
-          <BlogPostLink
-            heading="Posts in the same category"
-            posts={otherPostsHavingSameTag}
-          />
+          <BlogPostLink heading="Posts in the same category" posts={otherPostsHavingSameTag} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <BlogPostLink heading="Latest posts" posts={recentPosts} />
           <BlogTagLink heading="Categories" tags={tags} />

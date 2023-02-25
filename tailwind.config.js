@@ -6,6 +6,9 @@ module.exports = {
     'node_modules/react-daisyui/dist/**/*.js',
   ],
   theme: {
+    minHeight: {
+      'hero': '70vh',
+    },
     extend: {},
   },
   plugins: [require("daisyui")],
