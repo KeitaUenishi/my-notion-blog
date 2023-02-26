@@ -16,6 +16,7 @@ ol {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.8rem;
+  list-style: disc;
 }
 
 hr {
@@ -28,4 +29,28 @@ hr {
 
 code {
   background: #ffffff;
+}
+
+a {
+  color: #4682b4;
+  text-decoration: inherit;
+}
+
+/**
+ * 一旦の応急処置
+ */
+h3 {
+  color: #fff !important;
+}
+
+h4 {
+  color: #fff !important;
+}
+
+h5 {
+  color: #fff !important;
+}
+
+h6 {
+  color: #fff !important;
 }
