@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { NEXT_PUBLIC_SITE_TITLE } from './server-constants'
 import GoogleAnalytics from 'components/google-analytics'
 
@@ -25,6 +24,20 @@ const RootPage = async () => {
               <dt className="mb-2 text-sm font-bold text-gray-300 sm:mb-0">Job</dt>
               <dd className="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0">
                 <p className="text-lg text-gray-200 sm:text-sm">Web Engineer</p>
+              </dd>
+            </div>
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+              <dt className="mb-2 text-sm font-bold text-gray-300 sm:mb-0">Account</dt>
+              <dd className="mt-1 text-sm text-gray-200 sm:col-span-2 sm:mt-0">
+                <p className="text-lg text-gray-200 sm:text-sm">
+                  <a href="https://twitter.com/uk092908">Twitter</a>
+                </p>
+                <p className="text-lg text-gray-200 sm:text-sm">
+                  <a href="https://github.com/KeitaUenishi">GitHub</a>
+                </p>
+                <p className="text-lg text-gray-200 sm:text-sm">
+                  <a href="https://qiita.com/keitaUenishi">Qiita</a>
+                </p>
               </dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
