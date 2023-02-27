@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 
-import styles from 'styles/footer.module.css'
-
 // TODO: ヘッダーと定義を共通化する
 type FooterItem = {
   label: string

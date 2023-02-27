@@ -6,10 +6,8 @@ import {
   BlogTagLink,
   NextPageLink,
   PostDate,
-  PostExcerpt,
   PostTags,
   PostTitle,
-  ReadMoreLink,
 } from 'components/blog-parts'
 import GoogleAnalytics from 'components/google-analytics'
 import { colorClass } from 'components/notion-block'

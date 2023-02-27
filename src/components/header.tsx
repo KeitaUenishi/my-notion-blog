@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 interface NavItem {
   label: string
@@ -9,8 +8,6 @@ interface NavItem {
 }
 
 const Header = () => {
-  const pathname = usePathname()
-
   const navItems: NavItem[] = [
     { label: 'Top', path: '/' },
     { label: 'Blog', path: '/blog' },
