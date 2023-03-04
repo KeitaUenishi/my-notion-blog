@@ -5,15 +5,7 @@ import { getPostBySlug } from 'lib/notion/client'
 const BlogSlugHead = async ({ params: { slug } }) => {
   const post = await getPostBySlug(slug)
 
-  return post ? (
-    <DocumentHead
-      title={post.Title}
-      description={post.Excerpt}
-      path={getBlogLink(post.Slug)}
-    />
-  ) : (
-    <DocumentHead/>
-  )
+  return post ? <DocumentHead title={post.Title} path={getBlogLink(post.Slug)} /> : <DocumentHead />
 }
 
 export default BlogSlugHead
