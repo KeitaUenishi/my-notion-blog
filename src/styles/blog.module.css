@@ -78,6 +78,7 @@
   margin: 1.8rem 0 0.8rem;
   color: var(--fg);
   font-size: 1.8rem;
+  border-bottom-width: 1px;
 }
 /* .post :global(h5):after {
   color: var(--accents-1);

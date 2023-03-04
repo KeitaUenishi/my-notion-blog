@@ -26,7 +26,7 @@
   display: block;
   overflow: auto;
   padding: 2rem;
-  background: #ffffff;
+  background: #0d1117;
   font-size: 0.9rem;
   line-height: 1.2rem;
   border-radius: var(--radius);
@@ -34,7 +34,7 @@
 .code pre code {
   color: var(--fg);
   padding: 0;
-  background: #ffffff !important;
+  background: #0d1117 !important;
 }
 
 .callout {
@@ -91,6 +91,7 @@
   font-size: 1rem;
   line-height: 1.8rem;
   padding-inline-start: 1rem;
+  border: 1px #0d1117 solid;
 }
 .toDo > div {
 }
