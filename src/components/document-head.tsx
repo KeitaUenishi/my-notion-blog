@@ -9,7 +9,7 @@ const DocumentHead = ({ title = '', description = "Keita Uenishi's blog", path =
   const isSlugPath = elements[0] === '' && elements[1] === 'blog' && elements.length === 3
   const isRootPath = path === '' || path === '/'
 
-  const ogImageContent = '/images/header.jpg'
+  const ogImageContent = `${NEXT_PUBLIC_URL}/images/header.jpg`
   // if (!ogImageContent && NEXT_PUBLIC_URL) {
   //   if (isSlugPath) {
   //     ogImageContent = new URL(`/api/og-image?slug=${elements[2]}`, NEXT_PUBLIC_URL).toString()
