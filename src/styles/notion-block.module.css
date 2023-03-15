@@ -107,6 +107,7 @@
   width: 100%;
   max-width: 100%;
   font-size: 0.9rem;
+  border: 1px #ddd solid;
 }
 .bookmark > a {
   width: 100%;

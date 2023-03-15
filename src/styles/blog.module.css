@@ -89,7 +89,7 @@
 .post :global(h6) {
   margin: 1.8rem 0 0.8rem;
   color: var(--fg);
-  font-size: 1.4rem;
+  font-size: 1.7rem;
 }
 /* .post :global(h6):after {
   color: var(--accents-1);
@@ -125,7 +125,7 @@
 }
 .post p code {
   color: #eb5757;
-  padding: 0.25rem;
+  padding: 2px;
 }
 .post footer {
   padding: 0;
