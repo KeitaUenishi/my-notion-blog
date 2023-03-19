@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {
   NEXT_PUBLIC_URL,
   NEXT_PUBLIC_SITE_TITLE,
@@ -20,7 +19,7 @@ const DocumentHead = ({ title = '', description = "Keita Uenishi's blog", path =
   // }
 
   return (
-    <Head>
+    <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="robots" content="max-image-preview:large" />
       <meta charSet="utf-8" />
@@ -55,7 +54,7 @@ const DocumentHead = ({ title = '', description = "Keita Uenishi's blog", path =
         name="twitter:description"
         content={description ? description : NEXT_PUBLIC_SITE_DESCRIPTION}
       />
-    </Head>
+    </>
   )
 }
 
