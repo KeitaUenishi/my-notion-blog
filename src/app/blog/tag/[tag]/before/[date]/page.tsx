@@ -1,5 +1,11 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { NUMBER_OF_POSTS_PER_PAGE } from 'app/server-constants'
+import {
+  NEXT_PUBLIC_URL,
+  NEXT_PUBLIC_SITE_TITLE,
+  NEXT_PUBLIC_SITE_DESCRIPTION,
+  NUMBER_OF_POSTS_PER_PAGE,
+} from 'app/server-constants'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -25,6 +31,40 @@ import 'styles/notion-color.css'
 
 export const revalidate = 3600
 
+export async function generateMetadata({
+  params: { date: encodedDate, tag: encodedTag },
+}): Promise<Metadata> {
+  const date = decodeURIComponent(encodedDate)
+  const tag = decodeURIComponent(encodedTag)
+  const title = `Posts in ${tag} before ${date.split('T')[0]} - ${NEXT_PUBLIC_SITE_TITLE}`
+  const description = NEXT_PUBLIC_SITE_DESCRIPTION
+  const url = NEXT_PUBLIC_URL ? new URL('/blog', NEXT_PUBLIC_URL) : undefined
+  const imageURL = new URL('/images/blog-og-image.jpg', NEXT_PUBLIC_URL)
+
+  const metadata: Metadata = {
+    title: title,
+    openGraph: {
+      title: title,
+      description: description,
+      url: url,
+      siteName: title,
+      type: 'website',
+      images: [{ url: imageURL }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: title,
+      description: description,
+      images: [{ url: imageURL }],
+    },
+    alternates: {
+      canonical: url,
+    },
+  }
+
+  return metadata
+}
+
 const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedDate } }) => {
   const tag = decodeURIComponent(encodedTag)
   const date = decodeURIComponent(encodedDate)
@@ -41,7 +81,7 @@ const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedD
     getAllTags(),
   ])
 
-  const currentTag = posts[0]?.Tags.find(t => t.name === tag)
+  const currentTag = posts[0]?.Tags.find((t) => t.name === tag)
 
   return (
     <>
@@ -49,12 +89,15 @@ const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedD
       <div className={styles.container}>
         <div className={styles.mainContent}>
           <header>
-            <h2><span className={`tag ${currentTag && colorClass(currentTag.color)}`}>{tag}</span> before {date.split('T')[0]}</h2>
+            <h2>
+              <span className={`tag ${currentTag && colorClass(currentTag.color)}`}>{tag}</span>{' '}
+              before {date.split('T')[0]}
+            </h2>
           </header>
 
           <NoContents contents={posts} />
 
-          {posts.map(post => {
+          {posts.map((post) => {
             return (
               <div className={styles.post} key={post.Slug}>
                 <PostDate post={post} />
