@@ -32,7 +32,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   const title = `${post?.Title} - ${NEXT_PUBLIC_SITE_TITLE}`
   const description = post?.Excerpt
   const url = NEXT_PUBLIC_URL ? new URL(getBlogLink(post?.Slug || ''), NEXT_PUBLIC_URL) : undefined
-  const imageURL = new URL(`/api/og-image?slug=${post?.Slug}`, NEXT_PUBLIC_URL)
+  const imageURL = new URL(`/images/blog-og-image.jpg`, NEXT_PUBLIC_URL)
 
   const metadata: Metadata = {
     title: title,
