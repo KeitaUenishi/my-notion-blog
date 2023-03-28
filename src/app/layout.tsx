@@ -4,6 +4,8 @@ import Header from 'components/header'
 import 'styles/global.css'
 import 'styles/syntax-coloring.css'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: NEXT_PUBLIC_SITE_TITLE,
   description: NEXT_PUBLIC_SITE_DESCRIPTION,
