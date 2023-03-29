@@ -9,7 +9,7 @@ type FooterItem = {
 
 const footerLinks: FooterItem[] = [
   { label: 'Top', path: '/' },
-  { label: 'Blog', path: '/blog' },
+  { label: 'Posts', path: '/posts' },
 ]
 
 const Footer = () => (

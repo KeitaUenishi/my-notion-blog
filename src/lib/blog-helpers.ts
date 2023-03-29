@@ -1,23 +1,23 @@
 export const getBlogLink = (slug: string) => {
-  return `/blog/${slug}`
+  return `/posts/${slug}`
 }
 
 export const getTagLink = (tag: string) => {
-  return `/blog/tag/${encodeURIComponent(tag)}`
+  return `/posts/tag/${encodeURIComponent(tag)}`
 }
 
 export const getBeforeLink = (date: string) => {
-  return `/blog/before/${date}`
+  return `/posts/before/${date}`
 }
 
 export const getTagBeforeLink = (tag: string, date: string) => {
-  return `/blog/tag/${encodeURIComponent(tag)}/before/${date}`
+  return `/posts/tag/${encodeURIComponent(tag)}/before/${date}`
 }
 
 export const getDateStr = (date: string) => {
   const dt = new Date(date)
 
-  if(date.indexOf('T') !== -1){
+  if (date.indexOf('T') !== -1) {
     // Consider timezone
     const elements = date.split('T')[1].split(/([+-])/)
     if (elements.length > 1) {

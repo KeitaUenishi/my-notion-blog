@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
   NEXT_PUBLIC_URL,
@@ -12,33 +13,21 @@ import {
   NextPageLink,
   NoContents,
   PostDate,
-  PostExcerpt,
   PostTags,
   PostTitle,
-  ReadMoreLink,
 } from 'components/blog-parts'
 import GoogleAnalytics from 'components/google-analytics'
-import { colorClass } from 'components/notion-block'
-import {
-  getPosts,
-  getRankedPosts,
-  getPostsByTagBefore,
-  getFirstPostByTag,
-  getAllTags,
-} from 'lib/notion/client'
+import { getBlogLink } from 'lib/blog-helpers'
+import { getRankedPosts, getPostsBefore, getFirstPost, getAllTags } from 'lib/notion/client'
 import styles from 'styles/blog.module.css'
-import 'styles/notion-color.css'
 
 export const revalidate = 3600
 
-export async function generateMetadata({
-  params: { date: encodedDate, tag: encodedTag },
-}): Promise<Metadata> {
+export async function generateMetadata({ params: { date: encodedDate } }): Promise<Metadata> {
   const date = decodeURIComponent(encodedDate)
-  const tag = decodeURIComponent(encodedTag)
-  const title = `Posts in ${tag} before ${date.split('T')[0]} - ${NEXT_PUBLIC_SITE_TITLE}`
+  const title = `Post before ${date.split('T')[0]} - ${NEXT_PUBLIC_SITE_TITLE}`
   const description = NEXT_PUBLIC_SITE_DESCRIPTION
-  const url = NEXT_PUBLIC_URL ? new URL('/blog', NEXT_PUBLIC_URL) : undefined
+  const url = NEXT_PUBLIC_URL ? new URL('/posts', NEXT_PUBLIC_URL) : undefined
   const imageURL = new URL('/images/blog-og-image.jpg', NEXT_PUBLIC_URL)
 
   const metadata: Metadata = {
@@ -65,58 +54,52 @@ export async function generateMetadata({
   return metadata
 }
 
-const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedDate } }) => {
-  const tag = decodeURIComponent(encodedTag)
+const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
   const date = decodeURIComponent(encodedDate)
 
   if (!Date.parse(date) || !/^\d{4}-\d{2}-\d{2}/.test(date)) {
     notFound()
   }
 
-  const [posts, firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
-    getPostsByTagBefore(tag, date, NUMBER_OF_POSTS_PER_PAGE),
-    getFirstPostByTag(tag),
+  const [posts, firstPost, rankedPosts, tags] = await Promise.all([
+    getPostsBefore(date, NUMBER_OF_POSTS_PER_PAGE),
+    getFirstPost(),
     getRankedPosts(),
-    getPosts(5),
     getAllTags(),
   ])
 
-  const currentTag = posts[0]?.Tags.find((t) => t.name === tag)
-
   return (
     <>
-      <GoogleAnalytics pageTitle={`Posts in ${tag} before ${date.split('T')[0]}`} />
+      <GoogleAnalytics pageTitle={`Posts before ${date.split('T')[0]}`} />
       <div className={styles.container}>
         <div className={styles.mainContent}>
           <header>
-            <h2>
-              <span className={`tag ${currentTag && colorClass(currentTag.color)}`}>{tag}</span>{' '}
-              before {date.split('T')[0]}
-            </h2>
+            <h2>Posts before {date.split('T')[0]}</h2>
           </header>
 
           <NoContents contents={posts} />
 
           {posts.map((post) => {
             return (
-              <div className={styles.post} key={post.Slug}>
-                <PostDate post={post} />
-                <PostTags post={post} />
-                <PostTitle post={post} />
-                <PostExcerpt post={post} />
-                <ReadMoreLink post={post} />
-              </div>
+              <Link href={getBlogLink(post.Slug)} key={post.Slug}>
+                <div className={styles.postContainer}>
+                  <div className={styles.post}>
+                    <PostDate post={post} />
+                    <PostTags post={post} />
+                    <PostTitle post={post} />
+                  </div>
+                </div>
+              </Link>
             )
           })}
 
           <footer>
-            <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
+            <NextPageLink firstPost={firstPost} posts={posts} />
           </footer>
         </div>
 
         <div className={styles.subContent}>
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
-          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
           <BlogTagLink heading="Categories" tags={tags} />
         </div>
       </div>
@@ -124,4 +107,4 @@ const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedD
   )
 }
 
-export default BlogTagBeforeDatePage
+export default BlogBeforeDatePage

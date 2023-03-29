@@ -10,7 +10,7 @@ interface NavItem {
 const Header = () => {
   const navItems: NavItem[] = [
     { label: 'Top', path: '/' },
-    { label: 'Blog', path: '/blog' },
+    { label: 'Posts', path: '/posts' },
   ]
 
   return (

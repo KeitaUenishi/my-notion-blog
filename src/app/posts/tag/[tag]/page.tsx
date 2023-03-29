@@ -11,23 +11,30 @@ import {
   BlogPostLink,
   BlogTagLink,
   NextPageLink,
-  NoContents,
   PostDate,
   PostTags,
   PostTitle,
 } from 'components/blog-parts'
 import GoogleAnalytics from 'components/google-analytics'
+import { colorClass } from 'components/notion-block'
 import { getBlogLink } from 'lib/blog-helpers'
-import { getRankedPosts, getPostsBefore, getFirstPost, getAllTags } from 'lib/notion/client'
+import {
+  getPosts,
+  getRankedPosts,
+  getPostsByTag,
+  getFirstPostByTag,
+  getAllTags,
+} from 'lib/notion/client'
 import styles from 'styles/blog.module.css'
+import 'styles/notion-color.css'
 
-export const revalidate = 3600
+export const revalidate = 60
 
-export async function generateMetadata({ params: { date: encodedDate } }): Promise<Metadata> {
-  const date = decodeURIComponent(encodedDate)
-  const title = `Post before ${date.split('T')[0]} - ${NEXT_PUBLIC_SITE_TITLE}`
+export async function generateMetadata({ params: { tag: encodedTag } }): Promise<Metadata> {
+  const tag = decodeURIComponent(encodedTag)
+  const title = `Posts in ${tag} - ${NEXT_PUBLIC_SITE_TITLE}`
   const description = NEXT_PUBLIC_SITE_DESCRIPTION
-  const url = NEXT_PUBLIC_URL ? new URL('/blog', NEXT_PUBLIC_URL) : undefined
+  const url = NEXT_PUBLIC_URL ? new URL('/posts', NEXT_PUBLIC_URL) : undefined
   const imageURL = new URL('/images/blog-og-image.jpg', NEXT_PUBLIC_URL)
 
   const metadata: Metadata = {
@@ -54,30 +61,39 @@ export async function generateMetadata({ params: { date: encodedDate } }): Promi
   return metadata
 }
 
-const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
-  const date = decodeURIComponent(encodedDate)
+export async function generateStaticParams() {
+  const tags = await getAllTags()
+  return tags.map((tag) => ({ tag: tag.name }))
+}
 
-  if (!Date.parse(date) || !/^\d{4}-\d{2}-\d{2}/.test(date)) {
+const BlogTagPage = async ({ params: { tag: encodedTag } }) => {
+  const tag = decodeURIComponent(encodedTag)
+
+  const posts = await getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE)
+
+  if (posts.length === 0) {
     notFound()
   }
 
-  const [posts, firstPost, rankedPosts, tags] = await Promise.all([
-    getPostsBefore(date, NUMBER_OF_POSTS_PER_PAGE),
-    getFirstPost(),
+  const [firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
+    getFirstPostByTag(tag),
     getRankedPosts(),
+    getPosts(5),
     getAllTags(),
   ])
 
+  const currentTag = posts[0].Tags.find((t) => t.name === tag)
+
   return (
     <>
-      <GoogleAnalytics pageTitle={`Posts before ${date.split('T')[0]}`} />
+      <GoogleAnalytics pageTitle={`Posts in ${tag}`} />
       <div className={styles.container}>
         <div className={styles.mainContent}>
           <header>
-            <h2>Posts before {date.split('T')[0]}</h2>
+            <h2>
+              <span className={`tag ${colorClass(currentTag.color)}`}>{tag}</span>
+            </h2>
           </header>
-
-          <NoContents contents={posts} />
 
           {posts.map((post) => {
             return (
@@ -94,12 +110,13 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
           })}
 
           <footer>
-            <NextPageLink firstPost={firstPost} posts={posts} />
+            <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
           </footer>
         </div>
 
         <div className={styles.subContent}>
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
           <BlogTagLink heading="Categories" tags={tags} />
         </div>
       </div>
@@ -107,4 +124,4 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
   )
 }
 
-export default BlogBeforeDatePage
+export default BlogTagPage

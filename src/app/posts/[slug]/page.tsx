@@ -69,7 +69,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
 
   if (!post) {
     console.log(`Failed to find post for slug: ${slug}`)
-    redirect('/blog')
+    redirect('/posts')
   }
 
   const [blocks, rankedPosts, recentPosts, tags, sameTagPosts] = await Promise.all([
