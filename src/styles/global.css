@@ -33,6 +33,7 @@ code {
 
 a {
   color: #4682b4;
+  overflow-wrap: break-word;
   text-decoration: inherit;
 }
 
